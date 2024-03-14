@@ -1,0 +1,41 @@
+:host {
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.bg-mine {
+  background-color: #603eab;
+}
+
+#my-logo {
+  width: 200px;
+  border-radius: 10%;
+}
+
+nav {
+  height: 5rem;
+}
+
+@media screen and (max-width: 991px) {
+  a {
+    color: white;
+  }
+  .navbar-collapse {
+    z-index: 1001;
+    background-color: #603eab;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  a {
+    color: white;
+  }
+}
+
+.nav-link.active {
+  color: #8eccb0;
+}
+.nav-link:hover {
+  color: #8eccb0;
+}

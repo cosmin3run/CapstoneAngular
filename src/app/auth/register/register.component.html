@@ -1,0 +1,43 @@
+<section>
+  <div class="col-md-6 mb-4">
+    <div class="form-outline">
+      <input
+        [(ngModel)]="userData.username"
+        type="text"
+        id="username"
+        class="form-control form-control-lg"
+      />
+      <label class="form-label" for="username">Username</label>
+    </div>
+  </div>
+  <div class="col-md-6 mb-4">
+    <div class="form-outline">
+      <input
+        [(ngModel)]="userData.email"
+        type="text"
+        id="email"
+        class="form-control form-control-lg"
+      />
+      <label class="form-label" for="email">Email</label>
+    </div>
+  </div>
+  <div class="col-md-6 mb-4">
+    <div class="form-outline">
+      <input
+        [(ngModel)]="userData.password"
+        type="password"
+        id="password"
+        class="form-control form-control-lg"
+      />
+      <label class="form-label" for="password">Password</label>
+    </div>
+  </div>
+  <div class="mt-4 pt-2">
+    <input
+      class="btn btn-primary btn-block gradient-custom-3"
+      type="submit"
+      value="Invia"
+      (click)="register()"
+    />
+  </div>
+</section>
