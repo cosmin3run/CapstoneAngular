@@ -16,15 +16,21 @@ export class NavbarComponent implements OnInit {
   constructor(private authSrv: AuthService, private router: Router) {}
 
   ngOnInit(): void {
+    this.getToken();
+    if (this.token) {
+      this.getUserProfile();
+    }
+  }
+
+  getToken() {
     this.authSrv.token$.subscribe((_token) => {
       this.token = _token;
-      console.log(this.token);
     });
   }
 
   getUserProfile(): void {
     this.authSrv.getLoggedUser().subscribe(
-      (user: User) => {
+      (user: User | null) => {
         this.user = user;
         console.log(user);
       },

@@ -13,11 +13,13 @@ import { Route, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Route[] = [
   {
     path: '',
     component: HomeComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'register',
@@ -30,14 +32,17 @@ const routes: Route[] = [
   {
     path: 'portfolio',
     component: PortfolioComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'post',
     component: PostComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [AuthGuard],
   },
 ];
 

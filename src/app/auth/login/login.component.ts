@@ -13,11 +13,18 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  login(form: NgForm) {
+  onLogin(form: NgForm) {
+    console.log(form.value);
+    const data = {
+      email: form.value.email,
+      password: form.value.password,
+    };
     try {
-      this.authSrv.login(form.value).subscribe();
+      this.authSrv.login(data).subscribe();
+      this.router.navigate(['/']);
     } catch (error) {
-      alert('Login errato!');
+      alert('Login errato');
+      console.log(error);
       this.router.navigate(['/login']);
     }
   }

@@ -21,12 +21,8 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  register(user: {
-    username: string;
-    email: string;
-    password: string;
-  }): Observable<UserResponse> {
-    return this.http.post<UserResponse>(`${this.URL}/auth/register`, user).pipe(
+  register(user: { username: string; email: string; password: string }) {
+    return this.http.post(`${this.URL}/auth/register`, user).pipe(
       tap(() => {
         this.router.navigate(['/login']), catchError(this.errors);
       })
@@ -49,7 +45,7 @@ export class AuthService {
 
   logout() {
     this.authSbj.next(null);
-    localStorage.removeItem('user');
+    localStorage.removeItem('accessToken');
     this.router.navigate(['/login']);
   }
 
@@ -58,7 +54,7 @@ export class AuthService {
   }
 
   restore() {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem('accessToken');
     if (!user) {
       this.router.navigate(['/login']);
       return;
