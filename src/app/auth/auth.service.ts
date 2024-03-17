@@ -49,8 +49,8 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  getLoggedUser(): Observable<User> {
-    return this.http.get<User>(`${this.URL}/user/me`);
+  getLoggedUser(): Observable<UserResponse> {
+    return this.http.get<UserResponse>(`${this.URL}/user/me`);
   }
 
   restore() {

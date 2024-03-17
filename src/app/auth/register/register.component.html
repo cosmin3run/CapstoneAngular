@@ -1,43 +1,105 @@
-<section>
-  <div class="col-md-6 mb-4">
-    <div class="form-outline">
-      <input
-        [(ngModel)]="userData.username"
-        type="text"
-        id="username"
-        class="form-control form-control-lg"
-      />
-      <label class="form-label" for="username">Username</label>
-    </div>
+<div
+  id="backG"
+  class="container d-flex align-items-center justify-content-center"
+>
+  <div class="scale-in-ver-center">
+    <form
+      [formGroup]="subscribeForm"
+      (ngSubmit)="onRegister()"
+      class="px-3 py-4 rounded-3 text-white"
+    >
+      <h1 class="text-center heartbeat mt-2">Register</h1>
+
+      <div class="mb-3">
+        <label for="inputEmail" class="form-label">Email</label>
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          id="inputEmail"
+          formControlName="email"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="inputUsername" class="form-label">Username</label>
+        <input
+          type="text"
+          name="username"
+          class="form-control"
+          id="inputUsername"
+          formControlName="username"
+        />
+      </div>
+      <div class="mb-3 position-relative">
+        <label for="inputPassword" class="form-label">Password</label>
+        <input
+          (input)="confirmPasswordCorrected()"
+          type="password"
+          name="password"
+          class="form-control"
+          id="inputPassword"
+          formControlName="password"
+        />
+        <span
+          class="position-absolute end-0 top-50 pe-2 fs-5"
+          *ngIf="passwordVisible"
+        >
+          <i class="bi bi-eye" (click)="togglePasswordVisibility()"></i>
+        </span>
+        <span
+          class="position-absolute end-0 top-50 pe-2 fs-5"
+          *ngIf="!passwordVisible"
+        >
+          <i class="bi bi-eye-fill" (click)="togglePasswordVisibility()"></i>
+        </span>
+      </div>
+      <div class="position-relative">
+        <label for="inputConfirmPassword" class="form-label"
+          >Conferma password</label
+        >
+        <input
+          (input)="confirmPasswordCorrected()"
+          type="password"
+          name="confirmPassword"
+          class="form-control"
+          id="inputConfirmPassword"
+          formControlName="confirmPassword"
+        />
+        <span
+          class="position-absolute end-0 top-50 pe-2 fs-5"
+          *ngIf="passwordConfirmVisible"
+        >
+          <i class="bi bi-eye" (click)="togglePasswordVisibilityConfirm()"></i>
+        </span>
+        <span
+          class="position-absolute end-0 top-50 pe-2 fs-5"
+          *ngIf="!passwordConfirmVisible"
+        >
+          <i
+            class="bi bi-eye-slash"
+            (click)="togglePasswordVisibilityConfirm()"
+          ></i>
+        </span>
+      </div>
+      <p
+        class="text-danger position-absolute"
+        *ngIf="
+          !confirmPass$.getValue() &&
+          subscribeForm.controls['confirmPassword'].touched
+        "
+      >
+        La conferma non corrisponde alla password inserita
+      </p>
+
+      <button
+        type="submit"
+        class="btn btn-dark mt-4 w-100"
+        [disabled]="!subscribeForm.valid"
+        id="register"
+        [class.clicked]="buttonIsClicked"
+      >
+        <span>Conferma</span>
+      </button>
+    </form>
   </div>
-  <div class="col-md-6 mb-4">
-    <div class="form-outline">
-      <input
-        [(ngModel)]="userData.email"
-        type="text"
-        id="email"
-        class="form-control form-control-lg"
-      />
-      <label class="form-label" for="email">Email</label>
-    </div>
-  </div>
-  <div class="col-md-6 mb-4">
-    <div class="form-outline">
-      <input
-        [(ngModel)]="userData.password"
-        type="password"
-        id="password"
-        class="form-control form-control-lg"
-      />
-      <label class="form-label" for="password">Password</label>
-    </div>
-  </div>
-  <div class="mt-4 pt-2">
-    <input
-      class="btn btn-primary btn-block gradient-custom-3"
-      type="submit"
-      value="Invia"
-      (click)="register()"
-    />
-  </div>
-</section>
+</div>

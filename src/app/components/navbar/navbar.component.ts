@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Auth } from 'src/app/auth/auth';
 import { AuthService } from 'src/app/auth/auth.service';
-import { User } from 'src/app/interfaces/user';
+import { User, UserResponse } from 'src/app/interfaces/user';
 import { Observable } from 'rxjs';
+import { UserInfo } from 'src/app/interfaces/user-info';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class NavbarComponent implements OnInit {
   token!: Auth | null;
-  user!: User | null;
+  user!: UserResponse | null;
   constructor(private authSrv: AuthService, private router: Router) {}
 
   ngOnInit(): void {
@@ -30,7 +31,7 @@ export class NavbarComponent implements OnInit {
 
   getUserProfile(): void {
     this.authSrv.getLoggedUser().subscribe(
-      (user: User | null) => {
+      (user: UserResponse | null) => {
         this.user = user;
         console.log(user);
       },

@@ -8,6 +8,7 @@ import {
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -15,40 +16,97 @@ import { User } from 'src/app/interfaces/user';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup | null = null;
-
+  passwordVisible: boolean = false;
+  passwordConfirmVisible: boolean = false;
+  subscribeForm!: FormGroup;
+  confirmPass$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  buttonIsClicked: boolean = false;
   constructor(
+    private fb: FormBuilder,
     private authSrv: AuthService,
-    private router: Router // private formBuilder: FormBuilder
-  ) {
-    // this.registerForm = this.formBuilder.group({
-    //   username: new FormControl('', [Validators.required]),
-    //   email: new FormControl('', [Validators.required, Validators.email]),
-    //   password: new FormControl('', [Validators.required]),
-    //   confirmPassword: ['', Validators.required],
-    // });
+    private router: Router
+  ) {}
+
+  confirmPasswordCorrected() {
+    this.confirmPass$.next(false);
+
+    if (
+      this.subscribeForm.controls['password'].value ===
+      this.subscribeForm.controls['confirmPassword'].value
+    ) {
+      this.subscribeForm.controls['confirmPassword'].setErrors(null);
+      this.confirmPass$.next(true);
+    } else {
+      this.subscribeForm.controls['confirmPassword'].setErrors({
+        notEqual: true,
+      });
+      this.confirmPass$.next(false);
+    }
   }
 
-  userData: User = {
-    username: '',
-    email: '',
-    password: '',
-  };
+  ngOnInit(): void {
+    this.subscribeForm = this.fb.group({
+      username: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]],
+      confirmPassword: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+    });
+  }
 
-  ngOnInit(): void {}
+  geterrorsC(username: string, error: string) {
+    return this.subscribeForm.get(username)?.errors![error];
+  }
 
-  register() {
+  getFormC(username: string) {
+    return this.subscribeForm.get(username);
+  }
+
+  onRegister() {
+    const data = {
+      username: this.subscribeForm.controls['username'].value,
+      email: this.subscribeForm.controls['email'].value,
+      password: this.subscribeForm.controls['password'].value,
+    };
+
     try {
-      this.authSrv.register(this.userData).subscribe();
-    } catch (error: any) {
+      this.authSrv.register(data).subscribe();
+      this.router.navigate(['/login']);
+    } catch (error) {
+      console.log(error);
       alert(error);
       this.router.navigate(['/register']);
     }
   }
 
-  passwordsMatch(): boolean {
-    const password = this.registerForm?.get('password')?.value;
-    const confirmPassword = this.registerForm?.get('confirmPassword')?.value;
-    return password === confirmPassword;
+  togglePasswordVisibility(): void {
+    this.passwordVisible = !this.passwordVisible;
+    const passwordInput = document.getElementById('inputPassword');
+    if (passwordInput) {
+      passwordInput.setAttribute(
+        'type',
+        this.passwordVisible ? 'text' : 'password'
+      );
+    }
+  }
+  togglePasswordVisibilityConfirm(): void {
+    this.passwordConfirmVisible = !this.passwordConfirmVisible;
+    const passwordConfirmInput = document.getElementById(
+      'inputConfirmPassword'
+    );
+    if (passwordConfirmInput) {
+      passwordConfirmInput.setAttribute(
+        'type',
+        this.passwordConfirmVisible ? 'text' : 'password'
+      );
+    }
+  }
+
+  handleClick() {
+    this.buttonIsClicked = true;
+
+    // Rimuovi la classe dopo un certo periodo di tempo (ad esempio 300ms)
+    setTimeout(() => {
+      this.buttonIsClicked = false;
+    }, 300);
   }
 }

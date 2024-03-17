@@ -3,8 +3,8 @@
   font-weight: bold;
 }
 
-.bg-mine {
-  background-color: #603eab;
+.navbar {
+  background-color: #421f902e;
 }
 
 #my-logo {
@@ -17,20 +17,13 @@ nav {
 }
 
 @media screen and (max-width: 991px) {
-  a {
-    color: white;
-  }
   .navbar-collapse {
     z-index: 1001;
-    background-color: #603eab;
     padding-bottom: 1rem;
     padding-left: 1rem;
   }
 }
 @media screen and (min-width: 992px) {
-  a {
-    color: white;
-  }
 }
 
 .nav-link.active {
