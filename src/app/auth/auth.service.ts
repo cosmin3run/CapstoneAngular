@@ -57,6 +57,7 @@ export class AuthService {
     const user = localStorage.getItem('accessToken');
     if (!user) {
       this.router.navigate(['/login']);
+      alert("Ops, sembra tu non sia loggato. Effettua l'accesso");
       return;
     }
 
@@ -64,6 +65,7 @@ export class AuthService {
 
     if (this.jwtHelper.isTokenExpired(UserData.accessToken)) {
       this.router.navigate(['/login']);
+      alert('Ops, la tua sessione è scaduta, riloggati per entrare');
     }
     this.authSbj.next(UserData);
   }

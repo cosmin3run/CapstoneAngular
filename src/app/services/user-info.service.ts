@@ -24,4 +24,14 @@ export class UserInfoService {
       postUserInfo
     );
   }
+
+  patchUserInfo(
+    id: string,
+    patchUserInfo: UserInfo
+  ): Observable<UserInfoResponse> {
+    return this.http.put<UserInfoResponse>(
+      `${this.URL}/userInfo/${id}`,
+      patchUserInfo
+    );
+  }
 }

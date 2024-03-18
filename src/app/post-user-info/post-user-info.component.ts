@@ -58,6 +58,12 @@ export class PostUserInfoComponent implements OnInit {
     this.userInfoSrv.postUserInfo(postUserInfo.value).subscribe();
   }
 
+  // patchUserInfoSubmit(id: string, patchUserInfoForm: NgForm): void {
+  //   if (patchUserInfoForm.valid) {
+  //     this.userInfoSrv.patchUserInfo(id, user);
+  //   }
+  // }
+
   getUserInfo(): void {
     this.userInfoSrv
       .getLoggedUserInfo()
