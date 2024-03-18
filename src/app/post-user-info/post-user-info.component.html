@@ -1,29 +1,82 @@
-<form #postUserInfo="ngForm" (ngSubmit)="postUserInfoSubmit(postUserInfo)">
-  <div class="d-flex justify-content-around">
-    <mat-form-field>
-      <mat-label>Nome</mat-label>
-      <input matInput id="name" name="name" ngModel />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Cognome</mat-label>
-      <input matInput id="surname" name="surname" ngModel />
-    </mat-form-field>
-  </div>
-  <div class="d-flex flex-column">
-    <mat-form-field class="p-5">
-      <mat-label>Titolo della tua descrizione</mat-label>
-      <input matInput id="descriptionTitle" name="descriptionTitle" ngModel />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Inserisci la tua descrizione</mat-label>
-      <textarea
-        matInput
-        rows="3"
-        id="descriptionBody"
-        name="descriptionBody"
-        ngModel
-      ></textarea>
-    </mat-form-field>
-  </div>
-  <button type="submit">Invia</button>
-</form>
+<div class="form">
+  <form
+    #postUserInfo="ngForm"
+    (ngSubmit)="postUserInfoSubmit(postUserInfo)"
+    *ngIf="userInfo"
+  >
+    <div class="d-flex justify-content-around">
+      <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input matInput id="name" name="name" [(ngModel)]="userInfo.name" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Cognome</mat-label>
+        <input
+          matInput
+          id="surname"
+          name="surname"
+          [(ngModel)]="userInfo.surname"
+        />
+      </mat-form-field>
+    </div>
+    <div class="d-flex flex-column">
+      <mat-form-field class="p-5">
+        <mat-label>Titolo della tua descrizione</mat-label>
+        <input
+          matInput
+          id="descriptionTitle"
+          name="descriptionTitle"
+          [(ngModel)]="userInfo.descriptionTitle"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Inserisci la tua descrizione</mat-label>
+        <textarea
+          matInput
+          rows="3"
+          id="descriptionBody"
+          name="descriptionBody"
+          [(ngModel)]="userInfo.descriptionBody"
+        ></textarea>
+      </mat-form-field>
+    </div>
+    <button type="submit" class="btn btn-outline-success px-4 buttons">
+      Invia
+    </button>
+  </form>
+  <form
+    #postUserInfo="ngForm"
+    (ngSubmit)="postUserInfoSubmit(postUserInfo)"
+    *ngIf="!userInfo"
+  >
+    <div class="d-flex justify-content-around">
+      <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input matInput id="name" name="name" ngModel />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Cognome</mat-label>
+        <input matInput id="surname" name="surname" ngModel />
+      </mat-form-field>
+    </div>
+    <div class="d-flex flex-column">
+      <mat-form-field class="p-5">
+        <mat-label>Titolo della tua descrizione</mat-label>
+        <input matInput id="descriptionTitle" name="descriptionTitle" ngModel />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Inserisci la tua descrizione</mat-label>
+        <textarea
+          matInput
+          rows="3"
+          id="descriptionBody"
+          name="descriptionBody"
+          ngModel
+        ></textarea>
+      </mat-form-field>
+    </div>
+    <button type="submit" class="btn btn-outline-success px-4 buttons">
+      Invia
+    </button>
+  </form>
+</div>

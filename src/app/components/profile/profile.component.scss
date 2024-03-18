@@ -44,6 +44,7 @@
 
 .fonts {
   font-size: 15px;
+  text-align: left;
 }
 
 .social-list {
@@ -59,22 +60,15 @@
   font-size: 19px;
 }
 
-.buttons button:nth-child(1) {
+.buttons {
   border: 1px solid #8e24aa !important;
   color: #8e24aa;
   height: 40px;
 }
 
-.buttons button:nth-child(1):hover {
+.buttons:hover {
   border: 1px solid #8e24aa !important;
   color: #fff;
   height: 40px;
   background-color: #8e24aa;
-}
-
-.buttons button:nth-child(2) {
-  border: 1px solid #8e24aa !important;
-  background-color: #8e24aa;
-  color: #fff;
-  height: 40px;
 }
