@@ -14,6 +14,7 @@ import { PostUserInfoComponent } from 'src/app/post-user-info/post-user-info.com
 export class ProfileComponent implements OnInit {
   user!: UserResponse | null;
   token!: Auth | null;
+  textToCopy: string = '';
   constructor(
     private authSrv: AuthService,
     private router: Router,
@@ -42,6 +43,13 @@ export class ProfileComponent implements OnInit {
         console.error('Errore nel recupero del profilo utente:', error);
       }
     );
+  }
+
+  copyText(): void {
+    navigator.clipboard
+      .writeText(this.textToCopy)
+      .then(() => alert('Testo copiato!'))
+      .catch((err) => console.error('Impossibile copiare il testo:', err));
   }
 
   PopupPostUserInfo() {

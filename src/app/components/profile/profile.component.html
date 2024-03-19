@@ -11,9 +11,7 @@
         </div>
 
         <div class="text-center mt-3">
-          <span class="bg-secondary p-1 px-4 rounded text-white">{{
-            user?.role
-          }}</span>
+          <span class="role p-1 px-4 rounded text-white">{{ user?.role }}</span>
           <h2 class="mt-2">Username: {{ user?.username }}</h2>
           <h2 class="mt-2">Email: {{ user?.email }}</h2>
 
@@ -67,36 +65,64 @@
         </div>
 
         <div class="text-center mt-3">
-          <span class="bg-secondary p-1 px-4 rounded text-white">{{
-            user?.role
-          }}</span>
-          <div class="d-flex flex-column align-items-center mt-3">
-            <h4 class="mt-2">
-              Nome:
+          <span class="role p-1 px-4 rounded text-white">{{ user?.role }}</span>
+          <div class="d-flex justify-content-between flex-wrap mt-4 mx-4">
+            <div class="d-flex justify-content-between flex-wrap mx-4 mb-4">
               <span>{{ user?.userInfo?.name }}</span>
-            </h4>
-            <h4 class="mt-2">
-              Cognome: <span>{{ user?.userInfo?.surname }}</span>
-            </h4>
-            <h4 class="mt-2">
-              Email: <span>{{ user?.email }}</span>
-            </h4>
-          </div>
-          <h2 class="mt-2">{{ user?.userInfo?.descriptionTitle }}</h2>
 
-          <div class="px-4 mt-1">
+              <span class="ms-3">{{ user?.userInfo?.surname }}</span>
+            </div>
+            <div class="mx-4">
+              <ul
+                class="social-list d-flex flex-column align-items-start"
+                *ngIf="
+                  user?.userInfo?.instagram ||
+                  user?.userInfo?.linkedin ||
+                  user?.userInfo?.github ||
+                  user?.userInfo?.instagram
+                "
+              >
+                <p class="h3">Links</p>
+                <li *ngIf="user?.email">
+                  <i class="bi bi-envelope-at-fill"></i>
+                  <a
+                    class="mail"
+                    (click)="copyText()"
+                    tabindex="0"
+                    data-toggle="tooltip"
+                    title="Click to copy email"
+                    >{{ user?.email }}</a
+                  >
+                </li>
+
+                <li *ngIf="user?.userInfo?.github">
+                  <i class="bi bi-instagram"></i
+                  ><a href="{{ user?.userInfo?.github }}" target="_blank">{{
+                    user?.userInfo?.github
+                  }}</a>
+                </li>
+                <li *ngIf="user?.userInfo?.linkedin">
+                  <i class="bi bi-linkedin"></i
+                  ><a href="{{ user?.userInfo?.linkedin }}" target="_blank">{{
+                    user?.userInfo?.linkedin
+                  }}</a>
+                </li>
+                <li *ngIf="user?.userInfo?.instagram">
+                  <i class="bi bi-instagram"></i
+                  ><a href="{{ user?.userInfo?.instagram }}" target="_blank">{{
+                    user?.userInfo?.instagram
+                  }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <h2 class="">{{ user?.userInfo?.descriptionTitle }}</h2>
+
+          <div class="px-4 mt-3">
             <p class="fonts">
               {{ user?.userInfo?.descriptionBody }}
             </p>
           </div>
-
-          <ul class="social-list">
-            <li><i class="fa fa-facebook"></i></li>
-            <li><i class="fa fa-dribbble"></i></li>
-            <li><i class="fa fa-instagram"></i></li>
-            <li><i class="fa fa-linkedin"></i></li>
-            <li><i class="fa fa-google"></i></li>
-          </ul>
 
           <div class="d-flex justify-content-evenly">
             <button

@@ -54,10 +54,32 @@
   padding: 0;
 }
 
-.social-list li {
-  padding: 10px;
+.social-list i {
   color: #8e24aa;
   font-size: 19px;
+  margin-right: 8px;
+}
+.social-list a {
+  color: inherit;
+  font-size: 19px;
+  margin-right: 8px;
+  text-decoration: none;
+}
+.mail {
+  cursor: copy;
+}
+.social-list a:hover {
+  color: #8e24aa;
+  font-size: 19px;
+  margin-right: 8px;
+}
+.social-list li {
+  font-size: 14px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 300px;
+  white-space: nowrap;
+  text-align: start;
 }
 
 .buttons {
@@ -76,4 +98,10 @@
 span {
   font-weight: bold;
   font-size: large;
+}
+
+.role {
+  margin-top: 15px;
+  background-color: 444;
+  background-color: #444;
 }
