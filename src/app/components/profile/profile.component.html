@@ -4,7 +4,7 @@
       <div class="card p-3 py-4" *ngIf="user?.role === 'VISITOR'">
         <div class="text-center">
           <img
-            src="https://i.imgur.com/bDLhJiP.jpg"
+            src="{{ user?.userInfo?.avatar }}"
             width="100"
             class="rounded-circle"
           />
@@ -60,7 +60,7 @@
       <div class="card p-3 py-4" *ngIf="user?.role === 'USER'">
         <div class="text-center">
           <img
-            src="https://i.imgur.com/bDLhJiP.jpg"
+            src="{{ user?.userInfo?.avatar }}"
             width="100"
             class="rounded-circle"
           />
@@ -70,9 +70,18 @@
           <span class="bg-secondary p-1 px-4 rounded text-white">{{
             user?.role
           }}</span>
-          <h2 class="mt-2">Nome: {{ user?.userInfo?.name }}</h2>
-          <h2 class="mt-2">Cognome: {{ user?.userInfo?.surname }}</h2>
-          <h2 class="mt-2">Email: {{ user?.email }}</h2>
+          <div class="d-flex flex-column align-items-center mt-3">
+            <h4 class="mt-2">
+              Nome:
+              <span>{{ user?.userInfo?.name }}</span>
+            </h4>
+            <h4 class="mt-2">
+              Cognome: <span>{{ user?.userInfo?.surname }}</span>
+            </h4>
+            <h4 class="mt-2">
+              Email: <span>{{ user?.email }}</span>
+            </h4>
+          </div>
           <h2 class="mt-2">{{ user?.userInfo?.descriptionTitle }}</h2>
 
           <div class="px-4 mt-1">

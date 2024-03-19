@@ -1,9 +1,10 @@
 .form:before {
   content: "";
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 4px;
+
+  top: 0%;
+  left: 0%;
+  width: 10px;
   height: 100%;
   background-color: #e1bee7;
   transform: scaleY(1);
@@ -16,7 +17,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: 4px;
+  width: 10px;
   height: 100%;
   background-color: #8e24aa;
   transform: scaleY(0);

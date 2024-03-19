@@ -2,13 +2,13 @@
   font-size: 23px;
   font-weight: bold;
 }
-.nav-link {
-  color: white;
-}
 
 .navbar {
   background-color: #444;
   margin-bottom: 1px #8e24aa;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
 #my-logo {
@@ -33,6 +33,21 @@ nav {
 .nav-link.active {
   color: #8eccb0;
 }
+
+.nav-link {
+  color: white;
+  transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out,
+    padding-bottom 0.1s ease-in-out;
+}
+
 .nav-link:hover {
   color: #8eccb0;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #8eccb0;
+}
+
+.logout:hover {
+  color: rgba(255, 0, 0, 0.692);
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgba(255, 0, 0, 0.692);
 }

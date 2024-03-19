@@ -4,12 +4,12 @@
     (ngSubmit)="postUserInfoSubmit(postUserInfo)"
     *ngIf="userInfo"
   >
-    <div class="d-flex justify-content-around">
-      <mat-form-field>
+    <div class="d-flex justify-content-between">
+      <mat-form-field class="pe-2">
         <mat-label>Nome</mat-label>
         <input matInput id="name" name="name" [(ngModel)]="userInfo.name" />
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field class="pe-2">
         <mat-label>Cognome</mat-label>
         <input
           matInput
@@ -33,7 +33,7 @@
         <mat-label>Inserisci la tua descrizione</mat-label>
         <textarea
           matInput
-          rows="3"
+          rows="6"
           id="descriptionBody"
           name="descriptionBody"
           [(ngModel)]="userInfo.descriptionBody"
@@ -49,12 +49,12 @@
     (ngSubmit)="postUserInfoSubmit(postUserInfo)"
     *ngIf="!userInfo"
   >
-    <div class="d-flex justify-content-around">
-      <mat-form-field>
+    <div class="d-flex justify-content-between">
+      <mat-form-field class="pe-2">
         <mat-label>Nome</mat-label>
         <input matInput id="name" name="name" ngModel />
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field class="pe-2">
         <mat-label>Cognome</mat-label>
         <input matInput id="surname" name="surname" ngModel />
       </mat-form-field>
@@ -68,7 +68,7 @@
         <mat-label>Inserisci la tua descrizione</mat-label>
         <textarea
           matInput
-          rows="3"
+          rows="6"
           id="descriptionBody"
           name="descriptionBody"
           ngModel

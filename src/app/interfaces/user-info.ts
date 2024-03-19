@@ -11,4 +11,5 @@ export interface UserInfoResponse {
   surname: string;
   descriptionTitle: string;
   descriptionBody: string;
+  avatar: string;
 }
