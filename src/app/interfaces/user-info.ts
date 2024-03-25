@@ -1,3 +1,6 @@
+import { User } from './user';
+import { UserPostsResponse } from './user-posts';
+
 export interface UserInfo {
   name: string;
   surname: string;
@@ -18,4 +21,6 @@ export interface UserInfoResponse {
   descriptionTitle: string;
   descriptionBody: string;
   avatar: string;
+  user: User;
+  post: UserPostsResponse;
 }

@@ -18,6 +18,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { UploadPostsComponent } from './components/upload-posts/upload-posts.component';
+import { PostContentFormComponent } from './components/post-content-form/post-content-form.component';
 
 const routes: Route[] = [
   {
@@ -48,6 +50,11 @@ const routes: Route[] = [
     component: ProfileComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'uploadPost',
+    component: UploadPostsComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
@@ -60,6 +67,7 @@ const routes: Route[] = [
     ProfileComponent,
     PortfolioComponent,
     PostComponent,
+    UploadPostsComponent,
   ],
   imports: [
     BrowserModule,

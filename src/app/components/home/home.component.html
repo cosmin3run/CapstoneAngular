@@ -1,1 +1,39 @@
-<p>home works!</p>
+<div class="row justify-content-around custom-row">
+  <div
+    class="wrap animate pop justify-content-around col-3"
+    *ngFor="let user of userInfo"
+  >
+    <div class="overlay">
+      <div class="overlay-content animate slide-left delay-2">
+        <!-- <h1 class="animate slide-left pop delay-4">
+          {{ user.name }}
+        </h1> -->
+        <p
+          class="animate slide-left pop delay-5"
+          style="color: white; margin-bottom: 2.5rem"
+        >
+          {{ user.name }} <br />
+          {{ user.surname }}
+        </p>
+
+        <div class="dots animate ms-2">
+          <div class="dot animate slide-up delay-6"></div>
+          <div class="dot animate slide-up delay-7"></div>
+          <div class="dot animate slide-up delay-8"></div>
+        </div>
+      </div>
+      <img
+        class="image-content animate slide delay-5"
+        src="{{ user.avatar }}"
+      />
+    </div>
+    <div class="text">
+      <div id="scrollbar">
+        <img class="inset" src="{{ user.avatar }}" alt="" />
+        <p>
+          {{ user.descriptionBody }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

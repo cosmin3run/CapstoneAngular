@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { User, UserResponse } from 'src/app/interfaces/user';
 import { MatDialog } from '@angular/material/dialog';
 import { PostUserInfoComponent } from 'src/app/post-user-info/post-user-info.component';
+import { UploadPostsComponent } from '../upload-posts/upload-posts.component';
 
 @Component({
   selector: 'app-profile',
@@ -52,7 +53,10 @@ export class ProfileComponent implements OnInit {
       .catch((err) => console.error('Impossibile copiare il testo:', err));
   }
 
-  PopupPostUserInfo() {
+  popupPostUserInfo() {
     const dialogRef = this.dialog.open(PostUserInfoComponent);
+    dialogRef.afterClosed().subscribe(() => {
+      this.getUserProfile();
+    });
   }
 }

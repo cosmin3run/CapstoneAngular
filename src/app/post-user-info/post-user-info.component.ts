@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserResponse } from '../interfaces/user';
 import { Auth } from '../auth/auth';
 import { AuthService } from '../auth/auth.service';
@@ -28,6 +28,10 @@ import { CommonModule } from '@angular/common';
 export class PostUserInfoComponent implements OnInit {
   user!: UserResponse | null;
   token!: Auth | null;
+  avatarUrl: string | undefined;
+  @ViewChild('fileInput') fileInput: any;
+  file: File = new File([''], '');
+  previewUrl: string | ArrayBuffer | null = null;
   userInfo!: UserInfoResponse | null | undefined;
   constructor(
     private authSrv: AuthService,
@@ -61,19 +65,48 @@ export class PostUserInfoComponent implements OnInit {
     );
   }
 
-  postUserInfoSubmit(postUserInfo: NgForm): void {
-    console.log(postUserInfo.value);
-    this.userInfoSrv
-      .postUserInfo(postUserInfo.value)
-      .subscribe(() => window.location.reload());
-    const dialogRef = this.dialog.closeAll();
+  postUserInfoSubmit(postUserInfo: NgForm, clickedButton: string): void {
+    if (clickedButton === 'submit') {
+      this.userInfoSrv.postUserInfo(postUserInfo.value).subscribe(() => {
+        this.postAvatar(this.file);
+        // window.location.reload();
+      });
+
+      const dialogRef = this.dialog.closeAll();
+    } else if (clickedButton === 'updateAvatar') {
+      this.postAvatar(this.file);
+      if (this.file.size > 0) {
+        alert('Immagine aggiornata, aggiorna la pagina.');
+      }
+    }
   }
 
-  // patchUserInfoSubmit(id: string, patchUserInfoForm: NgForm): void {
-  //   if (patchUserInfoForm.valid) {
-  //     this.userInfoSrv.patchUserInfo(id, user);
-  //   }
-  // }
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.file = file;
+      this.previewFile(file);
+    }
+  }
+
+  previewFile(file: File) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.previewUrl = reader.result;
+    };
+  }
+
+  postAvatar(file: File) {
+    const formData = new FormData();
+    formData.append('img', file);
+
+    this.userInfoSrv.uploadAvatar(formData).subscribe({
+      next: (responseUrl: any) => {
+        this.avatarUrl = responseUrl;
+      },
+    });
+  }
 
   getUserInfo(): void {
     if (this.userInfo !== null) {

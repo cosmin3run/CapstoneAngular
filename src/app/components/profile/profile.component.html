@@ -45,7 +45,7 @@
           <div class="d-flex justify-content-evenly">
             <button
               class="btn btn-outline-success px-4 buttons"
-              (click)="PopupPostUserInfo()"
+              (click)="popupPostUserInfo()"
             >
               Aggiorna info
             </button>
@@ -127,12 +127,19 @@
           <div class="d-flex justify-content-evenly">
             <button
               class="btn btn-outline-success px-4 buttons"
-              (click)="PopupPostUserInfo()"
+              (click)="popupPostUserInfo()"
             >
               Aggiorna info
             </button>
             <button class="btn btn-outline-success px-4 buttons">
               Contact
+            </button>
+            <button
+              class="btn btn-outline-success px-4 buttons"
+              [routerLink]="['/uploadPost']"
+              routerLinkActive="active"
+            >
+              Aggiorna Posts
             </button>
           </div>
         </div>

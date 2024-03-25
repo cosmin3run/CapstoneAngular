@@ -1,0 +1,42 @@
+.buttons {
+  border: 1px solid #8e24aa !important;
+  color: #8e24aa;
+  height: 40px;
+}
+
+.buttons:hover {
+  border: 1px solid #8e24aa !important;
+  color: #fff;
+  height: 40px;
+  background-color: #8e24aa;
+}
+.form:before {
+  content: "";
+  position: absolute;
+
+  top: 0%;
+  left: 0%;
+  width: 10px;
+  height: 100%;
+  background-color: #e1bee7;
+  transform: scaleY(1);
+  transition: all 0.5s;
+  transform-origin: bottom;
+}
+
+.form:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 10px;
+  height: 100%;
+  background-color: #8e24aa;
+  transform: scaleY(0);
+  transition: all 0.5s;
+  transform-origin: bottom;
+}
+
+.form:hover::after {
+  transform: scaleY(1);
+}
