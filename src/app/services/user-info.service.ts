@@ -6,6 +6,8 @@ import { User, UserResponse } from '../interfaces/user';
 import { environment } from 'src/environments/environment';
 import { UserInfo, UserInfoResponse } from '../interfaces/user-info';
 import { UserPosts, UserPostsResponse } from '../interfaces/user-posts';
+import { PostComponent } from '../components/post/post.component';
+import { PostContent, PostContentResponse } from '../interfaces/post-content';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +32,13 @@ export class UserInfoService {
     return this.http.post<UserPostsResponse>(`${this.URL}/post`, postUserPost);
   }
 
+  postPostContent(postContent: PostContent): Observable<PostContentResponse> {
+    return this.http.post<PostContentResponse>(
+      `${this.URL}/postContent`,
+      postContent
+    );
+  }
+
   getAllUserInfo(page: number, size: number, orderBy: string): Observable<any> {
     const params = new HttpParams()
       .set('page', page.toString())
@@ -38,6 +47,28 @@ export class UserInfoService {
     return this.http.get<UserInfoResponse>(`${this.URL}/userInfo`, {
       params: params,
     });
+  }
+
+  getAllPosts(page: number, size: number, orderBy: string): Observable<any> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString())
+      .set('orderBy', orderBy);
+    return this.http.get<UserPostsResponse>(`${this.URL}/post`, {
+      params: params,
+    });
+  }
+
+  getPostById(id: string): Observable<UserPostsResponse> {
+    return this.http.get<UserPostsResponse>(`${this.URL}/post/${id}`);
+  }
+
+  getPostContentByPostId(
+    postId: string | undefined
+  ): Observable<PostContentResponse[]> {
+    return this.http.get<PostContentResponse[]>(
+      `${this.URL}/postContent/post/${postId}`
+    );
   }
 
   uploadAvatar(img: FormData): Observable<any> {
@@ -59,6 +90,18 @@ export class UserInfoService {
     console.log(img);
 
     return this.http.post<any>(`${this.URL}/post/upload`, img, {
+      headers: headers,
+    });
+  }
+
+  uploadContentImg(img: FormData, id: string): Observable<any> {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    headers.append('Accept', 'application/json');
+    img.append('id', id);
+    console.log(img);
+
+    return this.http.post<any>(`${this.URL}/postContent/upload`, img, {
       headers: headers,
     });
   }

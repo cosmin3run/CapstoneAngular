@@ -1,3 +1,4 @@
+import { PostContentResponse } from './post-content';
 import { UserInfo, UserInfoResponse } from './user-info';
 
 export interface UserPosts {
@@ -8,6 +9,8 @@ export interface UserPosts {
 export interface UserPostsResponse {
   id: string;
   title: string;
+  mainImg: string;
   publicationDate: Date;
   userInfo: UserInfoResponse;
+  postsContent: PostContentResponse[];
 }

@@ -1,4 +1,4 @@
-<div class="form mt-5" *ngIf="id == undefined">
+<div class="form mt-5 bigdiv">
   <form
     *ngIf="id == undefined"
     #postUserPost="ngForm"
@@ -34,6 +34,75 @@
             class="form-control d-none"
           />
           <label class="form-label m-1" for="mainImg"
+            >Inserisci immagine principale del post</label
+          >
+        </div>
+      </div>
+      <img
+        *ngIf="previewUrl"
+        [src]="previewUrl"
+        alt="Preview Image"
+        class="rounded-5 p-5 pt-0 w-25"
+      />
+    </div>
+    <div class="mt-5">
+      <h3 class="text-center">
+        Clicca su "Crea Progetto" per poter inserire il contenuto del progetto
+      </h3>
+      <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-outline-success px-4 buttons">
+          Aggiungi Post
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="container" *ngIf="id">
+    <div class="text-center">
+      <img src="{{ mainImg?.imageUrl }}" alt="" />
+
+      <div class="">
+        <p class="fs-4">
+          {{ userPost?.title }}
+        </p>
+      </div>
+      <div class="text-muted">{{ userPost?.publicationDate }}</div>
+    </div>
+  </div>
+  <div *ngFor="let content of postContent">
+    <img src="{{ content.image }}" alt="" />
+    <h2>{{ content.title }}</h2>
+    <h3>{{ content.content }}</h3>
+  </div>
+  <form
+    *ngIf="id"
+    #postContent="ngForm"
+    (ngSubmit)="uploadPostContent(postContent)"
+  >
+    <h2 class="text-center mb-5">Inserisci il sottotitolo della sezione</h2>
+    <div class="d-flex justify-content-center align-items-center flex-wrap">
+      <mat-form-field class="pe-2">
+        <mat-label>Title</mat-label>
+        <input matInput id="title" name="title" required ngModel />
+      </mat-form-field>
+      <mat-form-field class="pe-2">
+        <mat-label>Content</mat-label>
+        <input type="text" matInput id="content" name="content" ngModel />
+      </mat-form-field>
+    </div>
+    <h2 class="text-center">Inserisci un immagine per la sezione</h2>
+    <div class="d-flex justify-content-center">
+      <div class="d-flex">
+        <div class="btn btn-outline-success px-4 buttons">
+          <input
+            #fileInput
+            type="file"
+            (change)="onFileSelected($event)"
+            id="contentImg"
+            accept="image/*"
+            class="form-control d-none"
+          />
+          <label class="form-label m-1" for="contentImg"
             >Inserisci principale del post</label
           >
         </div>
@@ -45,20 +114,8 @@
         class="rounded-5 p-5 pt-0 w-25"
       />
     </div>
-    <h3 class="text-center">
-      Clicca su "Crea Progetto" per poter inserire il contenuto del progetto
-    </h3>
     <div class="d-flex justify-content-center">
-      <button type="submit" class="btn btn-outline-success px-4 buttons">
-        Aggiungi Post
-      </button>
-    </div>
-    <div class="d-flex justify-content-center">
-      <button
-        class="buttons btn btn-outline-success px-4 mt-5"
-        type="button"
-        (click)="popupPostContent()"
-      >
+      <button class="buttons btn btn-outline-success px-4 mt-5" type="submit">
         Inserisci contenuto
       </button>
     </div>
