@@ -4,7 +4,8 @@
 }
 
 .navbar {
-  background-color: #444;
+  background-color: transparent;
+  backdrop-filter: blur(3px);
   margin-bottom: 1px #8e24aa;
   position: sticky;
   top: 0;
@@ -31,7 +32,7 @@ nav {
 }
 
 .nav-link.active {
-  color: #8eccb0;
+  color: #77d2d2;
 }
 
 .nav-link {
@@ -41,13 +42,13 @@ nav {
 }
 
 .nav-link:hover {
-  color: #8eccb0;
+  color: #77d2d2;
   padding-bottom: 15px;
-  border-bottom: 2px solid #8eccb0;
+  border-bottom: 2px solid #77d2d2;
 }
 
 .logout:hover {
-  color: rgba(255, 0, 0, 0.692);
+  color: rgba(255, 60, 60, 0.644);
   padding-bottom: 15px;
-  border-bottom: 2px solid rgba(255, 0, 0, 0.692);
+  border-bottom: 2px solid rgba(255, 60, 60, 0.644);
 }

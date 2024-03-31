@@ -39,6 +39,14 @@ export class UserInfoService {
     );
   }
 
+  getUserInfoById(id: string): Observable<UserInfoResponse> {
+    return this.http.get<UserInfoResponse>(`${this.URL}/userInfo/${id}`);
+  }
+
+  getUserPostByUserInfoId(id: string): Observable<UserPostsResponse[]> {
+    return this.http.get<UserPostsResponse[]>(`${this.URL}/post/user/${id}`);
+  }
+
   getAllUserInfo(page: number, size: number, orderBy: string): Observable<any> {
     const params = new HttpParams()
       .set('page', page.toString())
@@ -59,10 +67,20 @@ export class UserInfoService {
     });
   }
 
+  getLoggedUserPosts(): Observable<UserPostsResponse[]> {
+    return this.http.get<UserPostsResponse[]>(`${this.URL}/post/me`);
+  }
+
   getPostById(id: string): Observable<UserPostsResponse> {
     return this.http.get<UserPostsResponse>(`${this.URL}/post/${id}`);
   }
+  deletePostById(id: string): Observable<any> {
+    return this.http.delete(`${this.URL}/post/${id}`);
+  }
 
+  deletePostContentById(id: string): Observable<any> {
+    return this.http.delete(`${this.URL}/postContent/${id}`);
+  }
   getPostContentByPostId(
     postId: string | undefined
   ): Observable<PostContentResponse[]> {

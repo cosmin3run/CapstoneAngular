@@ -1,1 +1,112 @@
-<p>portfolio works!</p>
+<div class="container pt-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-7">
+      <div class="card p-3 py-4">
+        <div class="text-center mt-3">
+          <div class="row d-flex justify-content-between flex-wrap mt-4 mx-4">
+            <div
+              class="col-12 col-sm-6 justify-content-between flex-wrap px-4 mb-4"
+            >
+              <div class="text-center">
+                <img
+                  src="{{ user?.avatar }}"
+                  width="100"
+                  class="rounded-circle"
+                />
+              </div>
+              <span class="role p-1 px-4 rounded text-white">{{
+                user?.user?.role
+              }}</span>
+              <div class="mt-4 row">
+                <p class="p-0 h3 text-center">
+                  {{ user?.name }} {{ user?.surname }}
+                </p>
+
+                <!-- <p class="col-12 col-md-6 p-0"></p> -->
+              </div>
+            </div>
+            <div class="px-4 col-12 col-sm-6">
+              <ul
+                class="social-list d-flex flex-column align-items-start"
+                *ngIf="
+                  user?.instagram ||
+                  user?.linkedin ||
+                  user?.github ||
+                  user?.instagram
+                "
+              >
+                <p class="h3">Links</p>
+                <li *ngIf="user?.user?.email">
+                  <i class="bi bi-envelope-at-fill"></i>
+                  <a
+                    class="mail"
+                    (click)="copyText()"
+                    tabindex="0"
+                    data-toggle="tooltip"
+                    title="Click to copy email"
+                    >{{ user?.user?.email }}</a
+                  >
+                </li>
+
+                <li *ngIf="user?.github">
+                  <i class="bi bi-instagram"></i
+                  ><a href="{{ user?.github }}" target="_blank">{{
+                    user?.github
+                  }}</a>
+                </li>
+                <li *ngIf="user?.linkedin">
+                  <i class="bi bi-linkedin"></i
+                  ><a href="{{ user?.linkedin }}" target="_blank">{{
+                    user?.linkedin
+                  }}</a>
+                </li>
+                <li *ngIf="user?.instagram">
+                  <i class="bi bi-instagram"></i
+                  ><a href="{{ user?.instagram }}" target="_blank">{{
+                    user?.instagram
+                  }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <h2 class="">{{ user?.descriptionTitle }}</h2>
+
+          <div class="px-4 mt-3">
+            <div class="description" [ngClass]="{ 'show-more': showMore }">
+              <p class="fonts">{{ user?.descriptionBody }}</p>
+            </div>
+            <button class="show-more-button" (click)="toggleShowMore()">
+              {{ showMore ? "Mostra meno" : "Mostra altro" }}
+            </button>
+          </div>
+
+          <div class="d-flex justify-content-evenly"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="projects">
+    <p class="text-center text-white h1 mt-5">Projects</p>
+    <div *ngFor="let post of userPosts" class="d-flex justify-content-center">
+      <div class="col-12 mb-5 w-75">
+        <div
+          class="img-container w-100 d-flex justify-content-between p-3"
+          [style.background-image]="'url(' + post.mainImg + ')'"
+        >
+          <h1 class="text-light fs-2 fw-bold mt-auto title ms-4">
+            {{ post.title }}
+          </h1>
+          <p class="text-light fw-bold title mt-auto ms-4">
+            {{ post.publicationDate }}
+          </p>
+        </div>
+        <button
+          class="btn btn-outline-success px-4 buttons"
+          (click)="checkPost(post.id)"
+        >
+          Visualizza <i class="bi bi-search"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

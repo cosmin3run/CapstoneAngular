@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { Auth } from 'src/app/auth/auth';
 import { AuthService } from 'src/app/auth/auth.service';
 import { UserInfo, UserInfoResponse } from 'src/app/interfaces/user-info';
@@ -18,7 +19,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private authSrv: AuthService,
-    private userInfoSrv: UserInfoService
+    private userInfoSrv: UserInfoService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +45,10 @@ export class HomeComponent implements OnInit {
           );
         }
       );
+  }
+
+  checkProfile(id: string) {
+    this.router.navigate(['/portfolio', id]);
   }
 
   getToken() {

@@ -36,7 +36,7 @@ export class AuthService {
         this.token = loggedIn;
         localStorage.setItem('accessToken', JSON.stringify(loggedIn));
         alert('Login effettuato');
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
         console.log(loggedIn);
       }),
       catchError(this.errors)

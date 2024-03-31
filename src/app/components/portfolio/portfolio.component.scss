@@ -1,0 +1,158 @@
+.container {
+  min-height: 100vh;
+  max-width: 100%;
+}
+
+.card {
+  border: none;
+  box-shadow: 0px 0px 40px 5px #000000;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.card:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background-color: #e1bee7;
+  transform: scaleY(1);
+  transition: all 0.5s;
+  transform-origin: bottom;
+}
+
+.card:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background-color: #8e24aa;
+  transform: scaleY(0);
+  transition: all 0.5s;
+  transform-origin: bottom;
+}
+
+.card:hover::after {
+  transform: scaleY(1);
+}
+
+.fonts {
+  font-size: 15px;
+  text-align: left;
+}
+
+.social-list {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  padding: 0;
+}
+
+.social-list i {
+  color: #8e24aa;
+  font-size: 19px;
+  margin-right: 8px;
+}
+.social-list a {
+  color: inherit;
+  font-size: 19px;
+  margin-right: 8px;
+  text-decoration: none;
+}
+.mail {
+  cursor: copy;
+}
+.social-list a:hover {
+  color: #8e24aa;
+  font-size: 19px;
+  margin-right: 8px;
+}
+.social-list li {
+  font-size: 14px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 300px;
+  white-space: nowrap;
+  text-align: start;
+}
+
+.buttons {
+  border: 1px solid #8e24aa !important;
+  color: white;
+  background-color: #8e24aa;
+  height: 40px;
+}
+
+.buttons:hover {
+  border: 1px solid #8e24aa !important;
+  color: #fff;
+  height: 40px;
+  background-color: #8e24aa;
+}
+
+span {
+  font-weight: bold;
+  font-size: large;
+}
+
+.role {
+  margin-top: 15px;
+  background-color: 444;
+  background-color: #444;
+}
+
+.img-container {
+  height: 200px;
+  -webkit-box-shadow: inset 0px -50px 15px -16px #000000;
+  box-shadow: inset 10px -90px 50px 10px #0a1e35;
+  z-index: 3;
+  //   background-image: url(https://i.imgur.com/qTudR9g.png);
+}
+
+.img-content {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.projects p {
+  padding-left: 10px;
+  border-left: #8e24aa solid 3px;
+  border-image: linear-gradient(
+      to bottom,
+      #0a1e35 5%,
+      #8e24aa 35% 65%,
+      #0a1e35 95%
+    )
+    0 0 0 100%;
+}
+
+.description {
+  max-height: 60px; /* Altezza massima delle righe visualizzate inizialmente */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: max-height 0.3s ease;
+}
+
+.show-more-button {
+  margin-block: 10px;
+  font-weight: bold;
+  color: #444;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: end;
+}
+
+.show-more-button:hover {
+  color: #0a1e35;
+}
+
+.show-more {
+  max-height: none; /* Visualizza tutte le righe quando "Mostra altro" è cliccato */
+  text-overflow: initial;
+}

@@ -151,6 +151,8 @@ export class UploadPostsComponent implements OnInit {
             this.uploadContentImg(this.file, response!.id);
             this.file = new File([''], '');
             this.previewUrl = null;
+          } else {
+            this.getPostContentByPostId(this.id);
           }
         });
     }
@@ -177,5 +179,11 @@ export class UploadPostsComponent implements OnInit {
   }
   popupPostContent() {
     const dialogRef = this.dialog.open(PostContentFormComponent);
+  }
+  openImageModal(imageUrl: string): void {
+    this.dialog.open(PostContentFormComponent, {
+      data: { imageUrl: imageUrl },
+      panelClass: 'custom-lightbox',
+    });
   }
 }

@@ -6,6 +6,8 @@ import { User, UserResponse } from 'src/app/interfaces/user';
 import { MatDialog } from '@angular/material/dialog';
 import { PostUserInfoComponent } from 'src/app/post-user-info/post-user-info.component';
 import { UploadPostsComponent } from '../upload-posts/upload-posts.component';
+import { UserPostsResponse } from 'src/app/interfaces/user-posts';
+import { UserInfoService } from 'src/app/services/user-info.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,10 +16,13 @@ import { UploadPostsComponent } from '../upload-posts/upload-posts.component';
 })
 export class ProfileComponent implements OnInit {
   user!: UserResponse | null;
+  userPosts: UserPostsResponse[] = [];
   token!: Auth | null;
   textToCopy: string = '';
+  showMore: boolean = false;
   constructor(
     private authSrv: AuthService,
+    private userSrv: UserInfoService,
     private router: Router,
     public dialog: MatDialog
   ) {}
@@ -26,6 +31,7 @@ export class ProfileComponent implements OnInit {
     this.getToken();
     if (this.token) {
       this.getUserProfile();
+      this.getLoggedUserPosts();
     }
   }
 
@@ -46,6 +52,21 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  getLoggedUserPosts(): void {
+    this.userSrv
+      .getLoggedUserPosts()
+      .subscribe((userPosts: UserPostsResponse[]) => {
+        this.userPosts = userPosts;
+        console.log(userPosts);
+      });
+  }
+
+  deletePostById(id: string): void {
+    this.userSrv.deletePostById(id).subscribe(() => {
+      this.userPosts = this.userPosts.filter((post) => post.id !== id);
+      alert('Post eliminato');
+    });
+  }
   copyText(): void {
     navigator.clipboard
       .writeText(this.textToCopy)
@@ -58,5 +79,11 @@ export class ProfileComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => {
       this.getUserProfile();
     });
+  }
+  toggleShowMore() {
+    this.showMore = !this.showMore;
+  }
+  checkPost(id: string) {
+    this.router.navigate(['/post', id]);
   }
 }

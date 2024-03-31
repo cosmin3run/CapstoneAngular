@@ -15,7 +15,7 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item" *ngIf="token">
-          <a class="nav-link" [routerLink]="['/']" routerLinkActive="active "
+          <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active"
             >Home</a
           >
         </li>
@@ -52,8 +52,8 @@
             class="nav-link d-flex align-items-baseline logout"
             [routerLink]="['/profile']"
             (click)="logout()"
-            >Logout<i class="bi bi-door-closed"></i
-          ></a>
+            >Logout</a
+          >
         </li>
       </ul>
     </div>

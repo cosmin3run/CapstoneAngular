@@ -1,1 +1,119 @@
-<p>post works!</p>
+<div class="pre-post mt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 mb-5">
+        <div
+          class="img-container w-100 d-flex justify-content-between p-3"
+          [style.background-image]="'url(' + post?.mainImg + ')'"
+        >
+          <h1 class="text-light fs-2 fw-bold mt-auto title ms-4">
+            {{ post?.title }}
+          </h1>
+          <p class="text-light fw-bold title mt-auto ms-4">
+            {{ post?.publicationDate }}
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="row mt-5 px-5 mb-4"
+        *ngFor="let content of postContent; let i = index"
+      >
+        <div [ngClass]="{ 'flex-row-reverse': i % 2 !== 0 }" class="row">
+          <div class="col-8 text-light">
+            <h2 class="text-white">{{ content.title }}</h2>
+            <p>
+              {{ content.content }}
+            </p>
+          </div>
+          <div class="col-4">
+            <img
+              src="{{ content.image }}"
+              alt=""
+              class="img-content"
+              (click)="openImageModal(content.image)"
+            />
+          </div>
+          <button
+            class="buttons btn btn-outline-success px-4 mt-5"
+            *ngIf="loggedUser?.userInfo?.id == userInfoLocal?.id"
+            (click)="deletePostContentById(content.id)"
+          >
+            Delete section
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-12 mb-5">
+      <div
+        class="img-container w-100 d-flex justify-content-between p-3"
+        [style.background-image]="'url(' + post + ')'"
+      >
+        <h1 class="text-light fs-2 fw-bold mt-auto title ms-4">
+          Titolo Progetto
+        </h1>
+        <p class="text-light fw-bold title mt-auto ms-4">{{ date }}</p>
+      </div>
+    </div>
+
+    <div class="row mt-5 px-5 mb-4">
+      <div class="col-8 text-light">
+        <h2 class="text-white">Sottotitolo</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo est
+          soluta ratione porro deserunt quod tempore nesciunt dolore veniam
+          omnis, blanditiis culpa quas ducimus sunt quaerat inventore eius illo
+          aliquid. Necessitatibus, numquam qui? Sint saepe voluptates odio
+          veritatis natus voluptatem id rem repellendus delectus aperiam
+          exercitationem nihil nulla pariatur, eaque neque consequuntur
+          similique laudantium quibusdam ea! Consequatur consequuntur dolore
+          quidem!
+        </p>
+      </div>
+      <div class="col-4">
+        <img src="{{ post }}" alt="" class="img-content" />
+      </div>
+    </div>
+    <div class="row mt-3 px-5 mb-4">
+      <div class="col-8 text-light">
+        <h2 class="text-white">Sottotitolo</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo est
+          soluta ratione porro deserunt quod tempore nesciunt dolore veniam
+          omnis, blanditiis culpa quas ducimus sunt quaerat inventore eius illo
+          aliquid. Necessitatibus, numquam qui? Sint saepe voluptates odio
+          veritatis natus voluptatem id rem repellendus delectus aperiam
+          exercitationem nihil nulla pariatur, eaque neque consequuntur
+          similique laudantium quibusdam ea! Consequatur consequuntur dolore
+          quidem!
+        </p>
+      </div>
+      <div class="col-4">
+        <img src="{{ post }}" alt="" class="img-content" />
+      </div>
+    </div>
+    <div class="row mt-3 px-5 mb-4">
+      <div class="col-8 text-light">
+        <h2 class="text-white">Sottotitolo</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo est
+          soluta ratione porro deserunt quod tempore nesciunt dolore veniam
+          omnis, blanditiis culpa quas ducimus sunt quaerat inventore eius illo
+          aliquid. Necessitatibus, numquam qui? Sint saepe voluptates odio
+          veritatis natus voluptatem id rem repellendus delectus aperiam
+          exercitationem nihil nulla pariatur, eaque neque consequuntur
+          similique laudantium quibusdam ea! Consequatur consequuntur dolore
+          quidem!
+        </p>
+      </div>
+      <div class="col-4">
+        <img src="{{ post }}" alt="" class="img-content" />
+      </div>
+    </div>
+  </div>
+</div> -->

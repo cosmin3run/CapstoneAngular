@@ -1,4 +1,4 @@
-import { User } from './user';
+import { User, UserResponse } from './user';
 import { UserPostsResponse } from './user-posts';
 
 export interface UserInfo {
@@ -21,6 +21,6 @@ export interface UserInfoResponse {
   descriptionTitle: string;
   descriptionBody: string;
   avatar: string;
-  user: User;
+  user: UserResponse;
   post: UserPostsResponse;
 }

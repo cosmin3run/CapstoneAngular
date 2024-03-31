@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     };
     try {
       this.authSrv.login(data).subscribe();
-      this.router.navigate(['/']);
+      this.router.navigate(['/home']);
     } catch (error) {
       alert('Login errato');
       console.log(error);

@@ -56,23 +56,30 @@
         </div>
       </div>
       <div class="card p-3 py-4" *ngIf="user?.role === 'USER'">
-        <div class="text-center">
-          <img
-            src="{{ user?.userInfo?.avatar }}"
-            width="100"
-            class="rounded-circle"
-          />
-        </div>
-
         <div class="text-center mt-3">
-          <span class="role p-1 px-4 rounded text-white">{{ user?.role }}</span>
-          <div class="d-flex justify-content-between flex-wrap mt-4 mx-4">
-            <div class="d-flex justify-content-between flex-wrap mx-4 mb-4">
-              <span>{{ user?.userInfo?.name }}</span>
+          <div class="row d-flex justify-content-between flex-wrap mt-4 mx-4">
+            <div
+              class="col-12 col-sm-6 justify-content-between flex-wrap px-4 mb-4"
+            >
+              <div class="text-center">
+                <img
+                  src="{{ user?.userInfo?.avatar }}"
+                  width="100"
+                  class="rounded-circle"
+                />
+              </div>
+              <span class="role p-1 px-4 rounded text-white">{{
+                user?.role
+              }}</span>
+              <div class="mt-4 row">
+                <p class="p-0 h3 text-center">
+                  {{ user?.userInfo?.name }} {{ user?.userInfo?.surname }}
+                </p>
 
-              <span class="ms-3">{{ user?.userInfo?.surname }}</span>
+                <!-- <p class="col-12 col-md-6 p-0"></p> -->
+              </div>
             </div>
-            <div class="mx-4">
+            <div class="px-4 col-12 col-sm-6">
               <ul
                 class="social-list d-flex flex-column align-items-start"
                 *ngIf="
@@ -119,9 +126,12 @@
           <h2 class="">{{ user?.userInfo?.descriptionTitle }}</h2>
 
           <div class="px-4 mt-3">
-            <p class="fonts">
-              {{ user?.userInfo?.descriptionBody }}
-            </p>
+            <div class="description" [ngClass]="{ 'show-more': showMore }">
+              <p class="fonts">{{ user?.userInfo?.descriptionBody }}</p>
+            </div>
+            <button class="show-more-button" (click)="toggleShowMore()">
+              {{ showMore ? "Mostra meno" : "Mostra altro" }}
+            </button>
           </div>
 
           <div class="d-flex justify-content-evenly">
@@ -131,17 +141,47 @@
             >
               Aggiorna info
             </button>
-            <button class="btn btn-outline-success px-4 buttons">
-              Contact
-            </button>
+
             <button
               class="btn btn-outline-success px-4 buttons"
               [routerLink]="['/uploadPost']"
               routerLinkActive="active"
             >
-              Aggiorna Posts
+              Crea Progetto
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="projects">
+    <p class="text-center text-white h1 mt-5">Projects</p>
+    <div *ngFor="let post of userPosts" class="d-flex justify-content-center">
+      <div class="col-12 mb-5 w-75 post-card">
+        <div
+          class="img-container w-100 d-flex justify-content-between p-3"
+          [style.background-image]="'url(' + post.mainImg + ')'"
+        >
+          <h1 class="text-light fs-2 fw-bold mt-auto title ms-4">
+            {{ post.title }}
+          </h1>
+          <p class="text-light fw-bold title mt-auto ms-4">
+            {{ post.publicationDate }}
+          </p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <button
+            class="btn btn-outline-success px-4 buttons"
+            (click)="checkPost(post.id)"
+          >
+            Visualizza <i class="bi bi-search"></i>
+          </button>
+          <button
+            class="btn btn-outline-success px-4 buttons w-25"
+            (click)="deletePostById(post.id)"
+          >
+            Cancella <i class="bi bi-trash3"></i>
+          </button>
         </div>
       </div>
     </div>

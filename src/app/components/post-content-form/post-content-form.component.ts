@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -32,6 +32,7 @@ export class PostContentFormComponent implements OnInit {
   previewUrl: string | ArrayBuffer | null = null;
   userInfo!: UserInfoResponse | null | undefined;
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { imageUrl: string },
     public dialog: MatDialog,
     private authSrv: AuthService,
     private userInfoSrv: UserInfoService

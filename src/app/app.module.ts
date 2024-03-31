@@ -23,7 +23,7 @@ import { PostContentFormComponent } from './components/post-content-form/post-co
 
 const routes: Route[] = [
   {
-    path: '',
+    path: 'home',
     component: HomeComponent,
     canActivate: [AuthGuard],
   },
@@ -36,12 +36,12 @@ const routes: Route[] = [
     component: LoginComponent,
   },
   {
-    path: 'portfolio',
+    path: 'portfolio/:id',
     component: PortfolioComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: 'post',
+    path: 'post/:id',
     component: PostComponent,
     canActivate: [AuthGuard],
   },

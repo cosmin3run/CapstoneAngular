@@ -1,123 +1,168 @@
-<div class="form mt-5 bigdiv">
-  <form
-    *ngIf="id == undefined"
-    #postUserPost="ngForm"
-    (ngSubmit)="uploadUserPost(postUserPost)"
-  >
-    <h2 class="text-center mb-5">Inserisci il titolo e data del tuo post</h2>
-    <div class="d-flex justify-content-center align-items-center flex-wrap">
-      <mat-form-field class="pe-2">
-        <mat-label>Title</mat-label>
-        <input matInput id="title" name="title" required ngModel />
-      </mat-form-field>
-      <mat-form-field class="pe-2">
-        <mat-label>publicationDate</mat-label>
-        <input
-          type="date"
-          matInput
-          id="publicationDate"
-          name="publicationDate"
-          ngModel
-        />
-      </mat-form-field>
-    </div>
-    <h2 class="text-center">Inserisci un immagine copertina del progetto</h2>
-    <div class="d-flex justify-content-center">
-      <div class="d-flex">
-        <div class="btn btn-outline-success px-4 buttons">
+<div class="container">
+  <p class="text-info text-center">
+    *Attenzione: se ricarichi la pagina, il progetto verrà salvato nel nostro
+    database, ma i dati inseriti verranno persi. Potrai comunque aggiungere un
+    nuovo progetto senza problemi.
+  </p>
+  <div class="form mt-5 d-flex justify-content-center mb-3">
+    <form
+      *ngIf="id == undefined"
+      #postUserPost="ngForm"
+      (ngSubmit)="uploadUserPost(postUserPost)"
+    >
+      <h2 class="text-center mb-5">Inserisci il titolo e data del tuo post</h2>
+      <div class="d-flex justify-content-center align-items-center flex-wrap">
+        <mat-form-field class="pe-2">
+          <mat-label>Title</mat-label>
+          <input matInput id="title" name="title" required ngModel />
+        </mat-form-field>
+        <mat-form-field class="pe-2">
+          <mat-label>publicationDate</mat-label>
           <input
-            #fileInput
-            type="file"
-            (change)="onFileSelected($event)"
-            id="mainImg"
-            accept="image/*"
-            class="form-control d-none"
+            type="date"
+            matInput
+            id="publicationDate"
+            name="publicationDate"
+            ngModel
           />
-          <label class="form-label m-1" for="mainImg"
-            >Inserisci immagine principale del post</label
-          >
-        </div>
+        </mat-form-field>
       </div>
-      <img
-        *ngIf="previewUrl"
-        [src]="previewUrl"
-        alt="Preview Image"
-        class="rounded-5 p-5 pt-0 w-25"
-      />
-    </div>
-    <div class="mt-5">
-      <h3 class="text-center">
-        Clicca su "Crea Progetto" per poter inserire il contenuto del progetto
-      </h3>
+      <h2 class="text-center">Inserisci un immagine copertina del progetto</h2>
       <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-outline-success px-4 buttons">
-          Aggiungi Post
-        </button>
+        <div class="d-flex">
+          <div class="btn btn-outline-success px-4 buttons">
+            <input
+              #fileInput
+              type="file"
+              (change)="onFileSelected($event)"
+              id="mainImg"
+              accept="image/*"
+              class="form-control d-none"
+            />
+            <label class="form-label m-1" for="mainImg"
+              >Inserisci immagine di copertina</label
+            >
+          </div>
+        </div>
+
+        <img
+          *ngIf="previewUrl"
+          [src]="previewUrl"
+          alt="Preview Image"
+          class="rounded-5 p-5 pt-0 w-25"
+        />
       </div>
-    </div>
-  </form>
 
-  <div class="container" *ngIf="id">
-    <div class="text-center">
-      <img src="{{ mainImg?.imageUrl }}" alt="" />
-
-      <div class="">
-        <p class="fs-4">
-          {{ userPost?.title }}
+      <div class="mt-5">
+        <h3 class="text-center">
+          Clicca su "Crea Progetto" per poter inserire il contenuto del progetto
+        </h3>
+        <div class="d-flex justify-content-center">
+          <button
+            type="submit"
+            class="btn btn-outline-success px-4 buttons mb-3"
+          >
+            Crea Progetto
+          </button>
+        </div>
+        <p class="text-center">
+          Inserisci i dettagli del tuo progetto qui sotto e ottieni una preview
+          istantanea di come apparirà nella pagina dettaglio
         </p>
       </div>
-      <div class="text-muted">{{ userPost?.publicationDate }}</div>
-    </div>
+    </form>
+
+    <form
+      *ngIf="id"
+      #postContent="ngForm"
+      (ngSubmit)="uploadPostContent(postContent)"
+    >
+      <h2 class="text-center mb-5">Inserisci il sottotitolo della sezione</h2>
+      <div class="d-flex justify-content-center align-items-center flex-wrap">
+        <mat-form-field class="pe-2">
+          <mat-label>Title</mat-label>
+          <input matInput id="title" name="title" required ngModel />
+        </mat-form-field>
+        <mat-form-field class="pe-2">
+          <mat-label>Content</mat-label>
+          <input type="text" matInput id="content" name="content" ngModel />
+        </mat-form-field>
+      </div>
+      <h2 class="text-center"></h2>
+      <div class="d-flex justify-content-center">
+        <div class="d-flex">
+          <div class="btn btn-outline-success px-4 buttons">
+            <input
+              #fileInput
+              type="file"
+              (change)="onFileSelected($event)"
+              id="contentImg"
+              accept="image/*"
+              class="form-control d-none"
+            />
+            <label class="form-label m-1" for="contentImg"
+              ><i class="bi bi-cloud-arrow-up">Img per la sezione</i></label
+            >
+          </div>
+        </div>
+        <img
+          *ngIf="previewUrl"
+          [src]="previewUrl"
+          alt="Preview Image"
+          class="rounded-5 p-5 pt-0 w-25"
+        />
+      </div>
+      <div class="d-flex justify-content-center">
+        <button class="buttons btn btn-outline-success px-4 mt-5" type="submit">
+          Inserisci contenuto
+        </button>
+      </div>
+      <p class="text-center">
+        Inserisci i dettagli del tuo progetto qui sotto e ottieni una preview
+        istantanea di come apparirà nella pagina dettaglio
+      </p>
+    </form>
   </div>
-  <div *ngFor="let content of postContent">
-    <img src="{{ content.image }}" alt="" />
-    <h2>{{ content.title }}</h2>
-    <h3>{{ content.content }}</h3>
-  </div>
-  <form
-    *ngIf="id"
-    #postContent="ngForm"
-    (ngSubmit)="uploadPostContent(postContent)"
-  >
-    <h2 class="text-center mb-5">Inserisci il sottotitolo della sezione</h2>
-    <div class="d-flex justify-content-center align-items-center flex-wrap">
-      <mat-form-field class="pe-2">
-        <mat-label>Title</mat-label>
-        <input matInput id="title" name="title" required ngModel />
-      </mat-form-field>
-      <mat-form-field class="pe-2">
-        <mat-label>Content</mat-label>
-        <input type="text" matInput id="content" name="content" ngModel />
-      </mat-form-field>
-    </div>
-    <h2 class="text-center">Inserisci un immagine per la sezione</h2>
-    <div class="d-flex justify-content-center">
-      <div class="d-flex">
-        <div class="btn btn-outline-success px-4 buttons">
-          <input
-            #fileInput
-            type="file"
-            (change)="onFileSelected($event)"
-            id="contentImg"
-            accept="image/*"
-            class="form-control d-none"
-          />
-          <label class="form-label m-1" for="contentImg"
-            >Inserisci principale del post</label
+
+  <div class="pre-post mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 mb-5">
+          <div
+            class="img-container w-100 d-flex justify-content-between p-3"
+            [style.background-image]="'url(' + mainImg?.imageUrl + ')'"
           >
+            <h1 class="text-light fs-2 fw-bold mt-auto title ms-4">
+              {{ userPost?.title }}
+            </h1>
+            <p class="text-light fw-bold title mt-auto ms-4">
+              {{ userPost?.publicationDate }}
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="row mt-5 px-5 mb-4"
+          *ngFor="let content of postContent; let i = index"
+        >
+          <div [ngClass]="{ 'flex-row-reverse': i % 2 !== 0 }" class="row">
+            <div class="col-8 text-light">
+              <h2 class="text-white">{{ content.title }}</h2>
+              <p>
+                {{ content.content }}
+              </p>
+            </div>
+            <div class="col-4">
+              <img
+                src="{{ content.image }}"
+                alt=""
+                class="img-content"
+                (click)="openImageModal(content.image)"
+              />
+            </div>
+          </div>
         </div>
       </div>
-      <img
-        *ngIf="previewUrl"
-        [src]="previewUrl"
-        alt="Preview Image"
-        class="rounded-5 p-5 pt-0 w-25"
-      />
     </div>
-    <div class="d-flex justify-content-center">
-      <button class="buttons btn btn-outline-success px-4 mt-5" type="submit">
-        Inserisci contenuto
-      </button>
-    </div>
-  </form>
+  </div>
 </div>

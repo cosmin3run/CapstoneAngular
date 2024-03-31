@@ -1,4 +1,4 @@
-<div class="row justify-content-around custom-row">
+<div class="row justify-content-around custom-row w-100">
   <div
     class="wrap animate pop justify-content-around col-3"
     *ngFor="let user of userInfo"
@@ -16,7 +16,7 @@
           {{ user.surname }}
         </p>
 
-        <div class="dots animate ms-2">
+        <div class="dots animate ms-2" (click)="checkProfile(user.id)">
           <div class="dot animate slide-up delay-6"></div>
           <div class="dot animate slide-up delay-7"></div>
           <div class="dot animate slide-up delay-8"></div>

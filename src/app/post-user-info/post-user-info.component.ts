@@ -32,7 +32,7 @@ export class PostUserInfoComponent implements OnInit {
   @ViewChild('fileInput') fileInput: any;
   file: File = new File([''], '');
   previewUrl: string | ArrayBuffer | null = null;
-  userInfo!: UserInfoResponse | null | undefined;
+  userInfo: UserInfoResponse | null = null;
   constructor(
     private authSrv: AuthService,
     private router: Router,
@@ -57,7 +57,7 @@ export class PostUserInfoComponent implements OnInit {
     this.authSrv.getLoggedUser().subscribe(
       (user: UserResponse | null) => {
         this.user = user;
-        this.userInfo = user?.userInfo;
+        this.userInfo = user?.userInfo ?? null;
       },
       (error) => {
         console.error('Errore nel recupero del profilo utente:', error);
@@ -65,7 +65,32 @@ export class PostUserInfoComponent implements OnInit {
     );
   }
 
+  postNewUserInfo(postUserInfo: NgForm): void {
+    const formValues = postUserInfo.value;
+    let name = formValues.name;
+    let surname = formValues.surname;
+    let descriptionTitle = formValues.descriptionTitle;
+    let descriptionBody = formValues.descriptionBody;
+
+    const value = {
+      name: name,
+      surname: surname,
+      descriptionTitle: descriptionTitle,
+      descriptionBody: descriptionBody,
+      linkedin: '', // Valore vuoto per linkedin
+      github: '', // Valore vuoto per github
+      instagram: '', // Valore vuoto per instagram
+    };
+    console.log(value);
+
+    this.userInfoSrv.postUserInfo(value).subscribe(() => {
+      window.location.reload();
+    });
+  }
+
   postUserInfoSubmit(postUserInfo: NgForm, clickedButton: string): void {
+    console.log(postUserInfo);
+
     if (clickedButton === 'submit') {
       this.userInfoSrv.postUserInfo(postUserInfo.value).subscribe(() => {
         this.postAvatar(this.file);
