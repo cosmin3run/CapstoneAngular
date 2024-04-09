@@ -100,6 +100,7 @@ p {
   float: left;
   transition: z-index 0.3s ease-in-out 1s;
   z-index: -1;
+  cursor: pointer;
 }
 
 .dots {
@@ -114,10 +115,13 @@ p {
   height: 4vmin;
   transition: 0.3s ease-in-out 0.3s;
 }
+.dots:hover {
+  cursor: pointer;
+}
 .dot {
   width: 14px;
   height: 14px;
-  background: yellow;
+  background: white;
   border: 1px solid #8e24aa;
   border-radius: 50%;
   transition: 0.3s ease-in-out 0.3s;
@@ -167,9 +171,9 @@ p {
   // transform: translateX(1rem);
   right: 10px;
 }
-.wrap:hover .dots .dot {
-  background: white;
-}
+// .wrap:hover .dots .dot {
+//   background: white;
+// }
 
 /* Animations and timing delays */
 .animate {

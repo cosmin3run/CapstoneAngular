@@ -29,7 +29,12 @@
     </div>
     <div class="text">
       <div id="scrollbar">
-        <img class="inset" src="{{ user.avatar }}" alt="" />
+        <img
+          class="inset"
+          src="{{ user.avatar }}"
+          alt=""
+          (click)="checkProfile(user.id)"
+        />
         <p>
           {{ user.descriptionBody }}
         </p>

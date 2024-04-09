@@ -35,7 +35,7 @@ export class AuthService {
         this.authSbj.next(loggedIn);
         this.token = loggedIn;
         localStorage.setItem('accessToken', JSON.stringify(loggedIn));
-        alert('Login effettuato');
+        // alert('Login effettuato');
         this.router.navigate(['/home']);
         console.log(loggedIn);
       }),

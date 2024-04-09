@@ -147,6 +147,7 @@ export class UploadPostsComponent implements OnInit {
       this.userSrv
         .postPostContent(postData)
         .subscribe((response: PostContentResponse | null) => {
+          form.resetForm();
           if (this.file.size > 0) {
             this.uploadContentImg(this.file, response!.id);
             this.file = new File([''], '');
