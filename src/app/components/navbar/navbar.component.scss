@@ -7,7 +7,8 @@
   background-color: transparent;
   backdrop-filter: blur(3px);
   margin-bottom: 1px #8e24aa;
-  position: sticky;
+  position: fixed;
+  width: 100%;
   top: 0;
   z-index: 999;
 }

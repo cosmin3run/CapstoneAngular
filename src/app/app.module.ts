@@ -20,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { UploadPostsComponent } from './components/upload-posts/upload-posts.component';
 import { PostContentFormComponent } from './components/post-content-form/post-content-form.component';
+import { ErrorInterceptor } from './interceptors/errorHandler.interceptor';
 
 const routes: Route[] = [
   {
@@ -83,6 +84,7 @@ const routes: Route[] = [
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

@@ -10,6 +10,7 @@ export interface UserPostsResponse {
   id: string;
   title: string;
   mainImg: string;
+  imageId: string;
   publicationDate: Date;
   userInfo: UserInfoResponse;
   postsContent: PostContentResponse[];

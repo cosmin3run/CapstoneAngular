@@ -55,6 +55,9 @@
             >SignUp</a
           >
         </div>
+        <div class="text-danger" *ngIf="loginError">
+          {{ loginError }}
+        </div>
       </form>
     </div>
   </div>

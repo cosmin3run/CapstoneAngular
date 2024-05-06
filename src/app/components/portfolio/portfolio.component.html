@@ -10,8 +10,7 @@
               <div class="text-center">
                 <img
                   src="{{ user?.avatar }}"
-                  width="100"
-                  class="rounded-circle"
+                  class="rounded-circle object-fit-cover profile-img"
                 />
               </div>
               <span class="role p-1 px-4 rounded text-white">{{
@@ -90,7 +89,7 @@
     <div *ngFor="let post of userPosts" class="d-flex justify-content-center">
       <div class="col-12 mb-5 w-75">
         <div
-          class="img-container w-100 d-flex justify-content-between p-3"
+          class="img-container d-flex justify-content-between p-3"
           [style.background-image]="'url(' + post.mainImg + ')'"
         >
           <h1 class="text-light fs-2 fw-bold mt-auto title ms-4">

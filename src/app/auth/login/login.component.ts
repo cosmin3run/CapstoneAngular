@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { ErrorService } from 'src/app/services/error.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +11,17 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private authSrv: AuthService, private router: Router) {}
+  loginError!: string | null;
+  subscriptions: Subscription[] = [];
+  constructor(
+    private authSrv: AuthService,
+    private router: Router,
+    private errorSrv: ErrorService
+  ) {
+    this.subscriptions.push(
+      this.errorSrv.error.subscribe((res) => (this.loginError = res))
+    );
+  }
 
   ngOnInit(): void {}
 

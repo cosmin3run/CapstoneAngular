@@ -107,11 +107,16 @@ span {
 }
 
 .img-container {
+  background-size: cover;
   height: 200px;
   -webkit-box-shadow: inset 0px -50px 15px -16px #000000;
   box-shadow: inset 10px -90px 50px 10px #0a1e35;
   z-index: 3;
   //   background-image: url(https://i.imgur.com/qTudR9g.png);
+}
+.profile-img {
+  // height: 100px;
+  width: 100%;
 }
 
 .img-content {

@@ -8,7 +8,8 @@ import {
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { ErrorService } from 'src/app/services/error.service';
 
 @Component({
   selector: 'app-register',
@@ -21,11 +22,18 @@ export class RegisterComponent implements OnInit {
   subscribeForm!: FormGroup;
   confirmPass$: BehaviorSubject<boolean> = new BehaviorSubject(true);
   buttonIsClicked: boolean = false;
+  registerError!: string | null;
+  subscriptions: Subscription[] = [];
   constructor(
     private fb: FormBuilder,
     private authSrv: AuthService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private errorSrv: ErrorService
+  ) {
+    this.subscriptions.push(
+      this.errorSrv.error.subscribe((res) => (this.registerError = res))
+    );
+  }
 
   confirmPasswordCorrected() {
     this.confirmPass$.next(false);
@@ -68,14 +76,17 @@ export class RegisterComponent implements OnInit {
       password: this.subscribeForm.controls['password'].value,
     };
 
-    try {
-      this.authSrv.register(data).subscribe();
-      this.router.navigate(['/login']);
-    } catch (error) {
-      console.log(error);
-      alert(error);
-      this.router.navigate(['/register']);
-    }
+    this.authSrv.register(data).subscribe(
+      () => {
+        // Se la registrazione è andata a buon fine, naviga verso /login
+        this.router.navigate(['/login']);
+      },
+      (error) => {
+        // Se c'è stato un errore durante la registrazione, imposta l'errore per visualizzarlo nell'HTML
+        this.registerError = error.message || 'Errore non specificato';
+      }
+    );
+    this.subscribeForm.reset();
   }
 
   togglePasswordVisibility(): void {

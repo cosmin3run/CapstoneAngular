@@ -27,7 +27,7 @@ export class UploadPostsComponent implements OnInit {
   @ViewChild('fileInput') fileInput: any;
   file: File = new File([''], '');
   previewUrl: string | ArrayBuffer | null = null;
-  mainImg: { imageUrl: string } | undefined;
+  mainImg: { imageUrl: string; imageId: string } | undefined;
   contentImg: string | undefined;
   id: string | undefined;
 
@@ -82,6 +82,7 @@ export class UploadPostsComponent implements OnInit {
     if (this.userInfo) {
       const title = form.value.title;
       const publicationDate = form.value.publicationDate;
+
       const postData = {
         title: title,
         publicationDate: publicationDate,
